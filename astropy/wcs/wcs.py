@@ -3305,7 +3305,7 @@ reduce these to 2 dimensions using the naxis kwarg.
             [WCSSUB_CELESTIAL, WCSSUB_SPECTRAL, WCSSUB_STOKES, WCSSUB_TIME]
         )  # Defined by C-ext
 
-    def rotate(self, angle, unit="deg"):
+    def rotate(self, angle=None, unit="deg"):
         """ 
         Rotate the WCS axes by a given angle.
         Returns a PC matrix that has been rotated by the given angle.
@@ -3318,6 +3318,9 @@ reduce these to 2 dimensions using the naxis kwarg.
             Unit of the ange, by default "deg", also possible "rad"
         """
         from astropy.coordinates import matrix_utilities
+
+        if angle is None:
+            raise ValueError("Angle must be specified")
 
         if unit == "deg":
             angle = np.rad2deg(angle)
