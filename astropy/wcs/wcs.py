@@ -3320,7 +3320,7 @@ reduce these to 2 dimensions using the naxis kwarg.
         from astropy.coordinates import matrix_utilities
 
         if angle is None:
-            raise ValueError("Angle must be specified")
+            raise ValueError("Angle must be specified.")
 
         if unit == "deg":
             angle = np.rad2deg(angle)
