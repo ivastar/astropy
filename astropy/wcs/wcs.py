@@ -3305,6 +3305,25 @@ reduce these to 2 dimensions using the naxis kwarg.
             [WCSSUB_CELESTIAL, WCSSUB_SPECTRAL, WCSSUB_STOKES, WCSSUB_TIME]
         )  # Defined by C-ext
 
+    def rotate(self, angle, unit="deg"):
+        """_summary_
+
+        Parameters
+        ----------
+        angle : float
+            Angle by which to rotate the WCS axes 
+        unit : str, optional
+            Unit of the ange, by default "deg", also possible "rad"
+        """
+        from astropy.coordinates import matrix_utilities
+
+        if unit == "deg":
+            angle = np.rad2deg(angle)
+        new_wcs = self.deepcopy()
+        new_wcs.wcs.pc = new_wcs.wcs.pc @ matrix_utilities.rotation_matrix(angle)[:2,:2]    
+
+        return new_wcs.wcs.pc
+
     def slice(self, view, numpy_order=True):
         """
         Slice a WCS instance using a Numpy slice. The order of the slice should
