@@ -3306,7 +3306,9 @@ reduce these to 2 dimensions using the naxis kwarg.
         )  # Defined by C-ext
 
     def rotate(self, angle, unit="deg"):
-        """_summary_
+        """ 
+        Rotate the WCS axes by a given angle.
+        Returns a PC matrix that has been rotated by the given angle.
 
         Parameters
         ----------
